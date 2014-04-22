@@ -12,6 +12,8 @@
 		<param name="default" type="text" default="" label="Default" description="" />
 	</params>
 	<params group="render">
+		<param name="width" type="text" default="auto" label="Width" description="" />
+		<param name="height" type="text" default="auto" label="Hight" description="" />
 		<param name="separated_by" type="zoolist" default="Space" label="Separated by" description="CHOOSE_SEPARATOR_REPEATED_ELEMENTS">
 			<option name="Space"><![CDATA[separator=[ ]]]></option>
 			<option name="Comma"><![CDATA[separator=[, ]]]></option>

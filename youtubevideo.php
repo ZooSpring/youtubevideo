@@ -22,12 +22,19 @@ App::getInstance('zoo')->loader->register('ElementRepeatable', 'elements:repeata
 class ElementYoutubeVideo extends ElementRepeatable implements iRepeatSubmittable {
 
 	/**
+	 * Variable: $_params
+	 *		Stores render parameters.
+	 */
+	protected 	$_params;
+
+	/**
 	 * Function: render
 	 * 		Renders the repeatable element.
 	 * @param 		$params - render parameter
 	 * @return 		String - html
 	 */
 	protected function _render($params = array()) {
+		$this->_params = $params;
 
 		$value = $this->get('value', $this->config->get('default'));
 		
@@ -70,11 +77,17 @@ class ElementYoutubeVideo extends ElementRepeatable implements iRepeatSubmittabl
 	 */
 	protected function _youtubeCodeEmbed( $vCode )
 	{
-		$width = $this->config->get('width', 425);
-		$height = $this->config->get('height', 344);
+		$width = $this->_params->get('width', 'auto');
+		$height = $this->_params->get('height', 'auto');
+		if( !is_numeric($width) || !is_numeric($height) ) {
+			$width = '560';
+			$height = '315';
+		}
 	
 		return '<object width="'.$width.'" height="'.$height.'"><param name="movie" value="http://www.youtube.com/v/'.$vCode.'"></param><param name="allowFullScreen" value="true"></param><embed src="http://www.youtube.com/v/'.$vCode.'" type="application/x-shockwave-flash" allowfullscreen="true" width="'.$width.'" height="'.$height.'"></embed></object>';
 	}
+
+
 	
 	/**
 	 * Function: _hasValue
